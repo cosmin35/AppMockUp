@@ -23,6 +23,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ROOM_COL_3 = "capacity";
     public static final String ROOM_COL_4 = "image";
 
+    public static final String BOOKING_TABLE_NAME = "bookings";
+    public static final String BOOK_COL_1 = "ID";
+    public static final String BOOK_COL_2 = "roomID";
+    public static final String BOOK_COL_3 = "date";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -32,6 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY  KEY AUTOINCREMENT, username TEXT, password TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE registerroom (ID INTEGER PRIMARY  KEY AUTOINCREMENT, name TEXT, capacity INTEGER)");// add image BITMAP
+        sqLiteDatabase.execSQL("CREATE TABLE bookings (ID INTEGER PRIMARY KEY AUTOINCREMENT, roomID INTEGER, date INTEGER)");
+
         //addRoom("Room_1", 90);
         //addRoom("Room_2", 10);
         //addRoom("Room_3", 50);
@@ -44,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
         sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + ROOM_TABLE_NAME);
+        sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + BOOKING_TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -109,9 +117,52 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return(cursor);
     }
 
+    public int getRoomId(String name){
+        String[] columns = {ROOM_COL_1};
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = ROOM_COL_2+"=?"+" and "+ ROOM_COL_3+"=?";//add +" and "+ROOM_COL_4+"=?"
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(ROOM_TABLE_NAME, columns,selection,selectionArgs,null,null,null);
+        int count = cursor.getCount();
+
+        int RoomId = cursor.getColumnIndex(ROOM_COL_1);
+
+        cursor.close();
+        db.close();
+
+        return(RoomId);
+    }
+
     public static byte[] getBitmapAsByteArray(Bitmap bitmap){
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
+
+    public long addBooking(int roomID, String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("roomID",roomID);
+        contentValues.put("date",date);
+        long res = db.insert("bookings",null,contentValues);
+        db.close();
+        return  res;
+    }
+
+    public boolean checkBooking(int roomID, String date){
+        String[] columns = {BOOK_COL_1};
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = BOOK_COL_2+"=?"+" and "+ BOOK_COL_3+"=?";//add +" and "+ROOM_COL_4+"=?"
+        String[] selectionArgs = {String.valueOf(roomID), String.valueOf(date)};
+        Cursor cursor = db.query(BOOKING_TABLE_NAME, columns,selection,selectionArgs,null,null,null);
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(count>0)
+            return true;
+        else
+            return false;
+    }
+
 }

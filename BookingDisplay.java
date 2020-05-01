@@ -1,12 +1,8 @@
 package uk.ac.wlv.nhs;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,28 +11,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
+public class BookingDisplay extends AppCompatActivity {
 
-public class RoomDisplay extends AppCompatActivity {
-
-    private static final String TAG = "RoomDisplay";
-
-    SQLiteDatabase SQLDB;
-    DatabaseHelper db;
-    Cursor cursor;
+    private static final String TAG = "BookingDisplay";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_display);
+        setContentView(R.layout.activity_booking_display);
         Log.d(TAG, "onCreate: Room Display Started");
 
         getIncomingIntent();
+
     }
 
     private void getIncomingIntent(){
@@ -44,10 +30,10 @@ public class RoomDisplay extends AppCompatActivity {
         if(getIntent().hasExtra("image_url")&&getIntent().hasExtra("image_name")){
             Log.d(TAG, "getIncomingIntent: found intets extra");
 
-            String imageUrl = getIntent().getStringExtra("image_url");
-            String imageName = getIntent().getStringExtra("image_name");
+            String image = getIntent().getStringExtra("image");
+            String Name = getIntent().getStringExtra("name");
 
-            setPage(imageUrl,imageName);
+            setPage(image,Name);
         }
     }
 
@@ -64,18 +50,7 @@ public class RoomDisplay extends AppCompatActivity {
                 .into(image);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void confirmBooking(View view){
-
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String today = dateFormat.format(date);
-
-        TextView textView = findViewById(R.id.RoomName);
-        String name = (String) textView.getText();
-
-        db.addBooking(db.getRoomId(name),today);
-
+    public void confirm(View view){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }

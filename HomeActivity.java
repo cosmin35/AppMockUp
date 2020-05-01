@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
-    Button bookingroom, cancelbooking ,Changebooking ;
+    Button bookingroom, cancelbooking ,Changebooking ,User ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         bookingroom = (Button) findViewById(R.id.bookingroom);
         cancelbooking = (Button) findViewById(R.id.cancelbooking);
         Changebooking = (Button)findViewById(R.id.changebooking);
+        User = (Button)findViewById(R.id.profileButton);
 
         bookingroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         cancelbooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(HomeActivity.this, roombooking.class);
+                Intent registerIntent = new Intent(HomeActivity.this, cancelbooking.class);
                 startActivity(registerIntent);
             }
         });
@@ -38,7 +39,15 @@ public class HomeActivity extends AppCompatActivity {
         Changebooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(HomeActivity.this, roombooking.class);
+                Intent registerIntent = new Intent(HomeActivity.this, changebooking.class);
+                startActivity(registerIntent);
+            }
+        });
+
+        User.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent registerIntent=new Intent(HomeActivity.this,ProfileActivity.class);
                 startActivity(registerIntent);
             }
         });

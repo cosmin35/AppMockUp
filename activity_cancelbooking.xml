@@ -6,15 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".cancelbooking">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="220dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="48dp"
-        android:text="Welcome to cancel booking page"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

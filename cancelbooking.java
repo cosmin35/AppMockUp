@@ -24,7 +24,6 @@ public class cancelbooking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancelbooking);
 
-
     }
 
     private void InitiateDetails(){
@@ -45,7 +44,7 @@ public class cancelbooking extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: Recycler Initiating");
 
         RecyclerView recyclerView =  findViewById(R.id.recyclerView);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames,mImages,this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames,mImages,mCap,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

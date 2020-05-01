@@ -18,20 +18,18 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mImageNames = new ArrayList<>();
+    private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Bitmap> mImages = new ArrayList<>();
-    private ArrayList<Integer> mCap = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> imageName, ArrayList<Bitmap> images, ArrayList<Integer> cap,Context context){
-        mImageNames = imageName;
+    public RecyclerViewAdapter2(ArrayList<String> imageName, ArrayList<Bitmap> images, Context context){
+        mNames = imageName;
         mImages = images;
         mContext = context;
-        mCap = cap;
     }
 
     @NonNull
@@ -40,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View view = inflater.inflate(R.layout.roomlist, parent, false);
+        View view = inflater.inflate(R.layout.bookinglist, parent, false);
 
         ViewHolder holder =  new ViewHolder(view);
         return holder;
@@ -55,17 +53,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .load(mImages.get(position))
                 .into(holder.image);
 
-        holder.imageName.setText(mImageNames.get(position));
+        holder.imageName.setText(mNames.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: "+mImageNames.get(position));
+                Log.d(TAG, "onClick: clicked on: "+mNames.get(position));
 
-                Intent intent = new Intent(mContext,RoomDisplay.class);
+                Intent intent = new Intent(mContext,BookingDisplay.class);
                 intent.putExtra("image_url",mImages.get(position));
-                intent.putExtra("image_name", mImageNames.get(position));
-                intent.putExtra("Cap", mCap.get(position));
+                intent.putExtra("image_name", mNames.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -73,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return mNames.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -47,7 +47,7 @@
         android:background="#006DD5"
         android:text="Change a booking"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/profileButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/profileButton"
         android:layout_width="140dp"
         android:layout_height="65dp"
         android:layout_marginTop="100dp"

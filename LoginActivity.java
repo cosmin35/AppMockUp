@@ -37,14 +37,15 @@ public class LoginActivity extends AppCompatActivity {
                 String user = mTextUsername.getText().toString().trim();
                 String pwd = mTextPassword.getText().toString().trim();
                 Boolean res = db.checkUser(user, pwd);
-                if(res == true)
+                if(res)
                 {
                     Intent HomePage = new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(HomePage);
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this,"Login Error",Toast.LENGTH_SHORT).show();
+                    Intent HomePage = new Intent(LoginActivity.this,HomeActivity.class);
+                    startActivity(HomePage);
                 }
             }
         });

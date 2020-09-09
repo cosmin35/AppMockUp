@@ -82,7 +82,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
 
         public ViewHolder(View itemView){
             super(itemView);
-            image=itemView.findViewById(R.id.image);
+            image=itemView.findViewById(R.id.imageRoomBook1);
             imageName=itemView.findViewById(R.id.image_name);
             parentLayout=itemView.findViewById(R.id.parent_layout);
             bookText=itemView.findViewById(R.id.book);

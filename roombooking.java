@@ -10,6 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,14 +25,18 @@ public class roombooking extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<Bitmap> mImages = new ArrayList<android.graphics.Bitmap>();
+    private ArrayList<Integer> mImages = new ArrayList<>(); //modified the array to be an array of integers so it can be populated with the images references
     private ArrayList<Integer> mCap = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roombooking);
         Log.d(TAG, "onCreate: started");
+
+
+
 
         initImageBitmaps();
 
@@ -38,31 +45,31 @@ public class roombooking extends AppCompatActivity {
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: Preparing Bitmaps");
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom1); //modified mImages;i added the images which were copied in res/drawable
         mNames.add("Room1");
         mCap.add(90);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom2);
         mNames.add("Room2");
         mCap.add(10);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom3);
         mNames.add("Room3");
         mCap.add(50);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom4);
         mNames.add("Room4");
         mCap.add(25);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom5);
         mNames.add("Room5");
         mCap.add(15);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom6);
         mNames.add("Room6");
         mCap.add(75);
 
-        mImages.add(null);
+        mImages.add(R.drawable.imgroom7);
         mNames.add("Room7");
         mCap.add(120);
 
